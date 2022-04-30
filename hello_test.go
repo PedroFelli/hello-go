@@ -2,23 +2,24 @@ package main
 
 import "testing"
 
-func TestOla(t *testing.T) {	
-	t.Run("should say hello to people", func(t *testing.T) {
-		result := Hello("Joao")
-		expected := "Hello, Joao"
-	
-		if result != expected{
-			t.Errorf("result '%s', expected '%s'", result, expected)
+func TestHello(t *testing.T) {
+	assertCorrectNessage := func(t testing.TB, got, want string){
+		t.Helper()
+		if got != want {
+			t.Errorf("got %s, want %s", got, want)
 		}
+	}
+	
+	t.Run("should say hello to people", func(t *testing.T) {
+		got := Hello("Joao")
+		want := "Hello, Joao"
+		assertCorrectNessage(t, got, want)
 	})
 
 	t.Run("should say 'Hello, word' when name is empty", func(t *testing.T) {
-		result := Hello("")
-		expected := "Hello, word"
-	
-		if result != expected{
-			t.Errorf("result '%s', expected '%s'", result, expected)
-		}
+		got := Hello("")
+		want := "Hello, word"
+		assertCorrectNessage(t, got, want)
 	})
 	
 }
